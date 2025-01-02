@@ -22,6 +22,11 @@ namespace MiniInventoryManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
+            if (await _productRepository.ExistsByNameAsync(product.Name))
+            {
+                ModelState.AddModelError("Name", "Product with this name already exists.");
+            }
+
             if (ModelState.IsValid)
             {
                 await _productRepository.AddAsync(product);
