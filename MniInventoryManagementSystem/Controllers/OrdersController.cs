@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MiniInventoryManagementSystem.Contexts;
 using MiniInventoryManagementSystem.Interfaces;
 using MiniInventoryManagementSystem.Models;
 using MiniInventoryManagementSystem.Repositories;
-
 
 namespace MiniInventoryManagementSystem.Controllers
 {
@@ -20,11 +20,14 @@ namespace MiniInventoryManagementSystem.Controllers
         public IActionResult PlaceOrder() => View();
 
         [HttpPost]
-        public IActionResult PlaceOrder(Order order)
+        public async Task<IActionResult> PlaceOrderAsync(Order order)
         {
-            var message = _productRepository.PlaceOrderAsync(order.Id,order.Quantity);
+            var message = await _productRepository.PlaceOrderAsync(order.ProductId, order.Quantity);
             ViewBag.Message = message;
             return View();
         }
+
+
+
     }
 }

@@ -4,6 +4,6 @@ namespace MiniInventoryManagementSystem.Interfaces
 {
     public interface IOrderService
     {
-       // string PlaceOrder(Order order);
+      //  string PlaceOrder(Order order);
     }
 }
